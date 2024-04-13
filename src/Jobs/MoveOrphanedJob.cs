@@ -55,21 +55,34 @@ public partial class MoveOrphanedJob(
         foreach (var filePath in localOrphanedFiles)
         {
             var mappedPath = filePath.Replace(localPath, "");
+            var destinationPath = Path.Combine(localOrphanPath, mappedPath);
+
             _logger.LogDebug(
                 "{filePath} to {destinationPath}",
                 _pathMappingService.MapToRemotePath(filePath),
-                _pathMappingService.MapToRemotePath(Path.Combine(localOrphanPath, mappedPath))
+                _pathMappingService.MapToRemotePath(destinationPath)
             );
             if (settings.DryRun)
                 continue;
 
             if (File.Exists(filePath))
             {
-                File.Move(filePath, Path.Combine(localOrphanPath, mappedPath));
+                var destinationDirectory = Path.GetDirectoryName(destinationPath);
+                if (destinationDirectory is null)
+                {
+                    _logger.LogWarning("Could not get directory for {filePath}", filePath);
+                    continue;
+                }
+                if (!Directory.Exists(destinationDirectory))
+                    Directory.CreateDirectory(destinationDirectory);
+
+                File.Move(filePath, destinationPath);
             }
             else if (Directory.Exists(filePath))
             {
-                Directory.Move(filePath, Path.Combine(localOrphanPath, mappedPath));
+                if (!Directory.Exists(destinationPath))
+                    Directory.CreateDirectory(destinationPath);
+                Directory.Move(filePath, destinationPath);
             }
         }
         _logger.LogInformation("Moved orphaned {count} files", localOrphanedFiles.Count());
