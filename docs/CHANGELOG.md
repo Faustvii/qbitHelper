@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/Faustvii/qbitHelper/compare/v1.1.1...v1.1.2) (2024-04-13)
+
+
+### Bug Fixes
+
+* check for file existing before trying to move it ([1dc8832](https://github.com/Faustvii/qbitHelper/commit/1dc8832a3c6a7a3b83dfb6ae6904f098f27e7aa5))
+
 ## [1.1.1](https://github.com/Faustvii/qbitHelper/compare/v1.1.0...v1.1.1) (2024-04-13)
 
 
