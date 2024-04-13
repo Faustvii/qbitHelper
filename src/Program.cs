@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using QBitHelper;
@@ -8,6 +9,9 @@ using Quartz;
 using Serilog;
 
 var builder = Host.CreateDefaultBuilder()
+    .ConfigureAppConfiguration(x =>
+        x.AddJsonFile("config/appsettings.json", optional: true, reloadOnChange: true)
+    )
     .ConfigureServices(
         (hostContext, services) =>
         {

@@ -6,9 +6,9 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/bin/Debug/net8.0/qbithelper.dll",
+            "program": "${workspaceFolder}/src/bin/Debug/net8.0/qbithelper.dll",
             "args": [],
-            "cwd": "${workspaceFolder}",
+            "cwd": "${workspaceFolder}/src/",
             "console": "internalConsole",
             "stopAtEntry": false,
             "logging": {
@@ -26,7 +26,7 @@
             "request": "launch",
             "preLaunchTask": "docker-run: debug",
             "netCore": {
-                "appProject": "${workspaceFolder}/qbithelper.csproj"
+                "appProject": "${workspaceFolder}/src/qbithelper.csproj"
             }
         }
     ]
