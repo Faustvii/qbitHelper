@@ -63,7 +63,14 @@ public partial class MoveOrphanedJob(
             if (settings.DryRun)
                 continue;
 
-            Directory.Move(filePath, Path.Combine(localOrphanPath, mappedPath));
+            if (File.Exists(filePath))
+            {
+                File.Move(filePath, Path.Combine(localOrphanPath, mappedPath));
+            }
+            else if (Directory.Exists(filePath))
+            {
+                Directory.Move(filePath, Path.Combine(localOrphanPath, mappedPath));
+            }
         }
         _logger.LogInformation("Moved orphaned {count} files", localOrphanedFiles.Count());
     }
