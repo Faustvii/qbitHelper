@@ -51,6 +51,9 @@ public partial class MoveOrphanedJob(
             localOrphanedFiles.Count(),
             allFiles.Length
         );
+        
+        if (!localOrphanedFiles.Any())
+            return;
 
         foreach (var filePath in localOrphanedFiles)
         {

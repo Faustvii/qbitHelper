@@ -38,7 +38,7 @@ public class TagTorrentPrivacyJob(
 
         if (torrentsToTag.Count == 0)
         {
-            logger.LogInformation("All torrents are already tagged");
+            logger.LogDebug("All torrents are already tagged");
             return;
         }
 

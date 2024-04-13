@@ -23,12 +23,17 @@ public class InformArrAboutStalledJob(
         var settings = optionsAccessor.CurrentValue;
         var client = await qBittorentClientAccessor.GetClient();
         var torrents = await client.GetTorrentListAsync();
+        var limitDate = now.AddMinutes(settings.JobConfig.StalledArr.MinimumTorrentAgeMinutes * -1);
         var stalledBoys = torrents.Where(x =>
             x.State == TorrentState.StalledDownload
-            || x.State == TorrentState.FetchingMetadata
-                && x.AddedOn
-                    > now.AddMinutes(settings.JobConfig.StalledArr.MinimumTorrentAgeMinutes * -1)
+            || x.State == TorrentState.FetchingMetadata && x.AddedOn < limitDate
         );
+
+        if (!stalledBoys.Any())
+        {
+            logger.LogDebug("No stalled torrents found");
+            return;
+        }
 
         var arrCategories = settings.TorrentCategoryArrConfigs.Keys;
         var arrQueue = new Dictionary<string, IEnumerable<QueueRecord>>();
