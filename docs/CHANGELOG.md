@@ -1,3 +1,10 @@
+## [1.1.4](https://github.com/Faustvii/qbitHelper/compare/v1.1.3...v1.1.4) (2024-04-13)
+
+
+### Bug Fixes
+
+* Stalled torrents were considered before they were old ([ab02f70](https://github.com/Faustvii/qbitHelper/commit/ab02f706846132e30432c4bba467bbb4440a97e5))
+
 ## [1.1.3](https://github.com/Faustvii/qbitHelper/compare/v1.1.2...v1.1.3) (2024-04-13)
 
 
