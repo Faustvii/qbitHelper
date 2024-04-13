@@ -1,4 +1,5 @@
 using System.Text.RegularExpressions;
+using Microsoft.Extensions.FileSystemGlobbing;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using QBitHelper.Services;
@@ -34,10 +35,14 @@ public partial class MoveOrphanedJob(
         var localOrphanPath = _pathMappingService.MapToLocalPath(
             settings.JobConfig.Orphan.OrphanPath
         );
+        var globPatterns = settings.JobConfig.Orphan.ExcludePatterns;
+        var matcher = new Matcher();
+        matcher.AddIncludePatterns(globPatterns);
 
         var allFiles = Directory
             .GetFiles(localPath, "*", SearchOption.AllDirectories)
             .Where(file => !file.Contains(localOrphanPath, StringComparison.Ordinal))
+            .Where(file => !matcher.Match(file).HasMatches)
             .ToArray();
 
         var localOrphanedFiles = allFiles.Except(localPaths);

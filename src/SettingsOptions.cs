@@ -32,6 +32,7 @@ public class OrphanJobConfig
     public required string OrphanPath { get; set; }
     public required int EmptyOrphanedDirectoryAfterDays { get; set; }
     public required int IntervalMinutes { get; set; }
+    public string[] ExcludePatterns { get; set; } = [];
 }
 
 public class StalledArrJobConfig
