@@ -1,0 +1,9 @@
+
+version: '3.4'
+
+services:
+  qbithelper:
+    image: qbithelper
+    build:
+      context: .
+      dockerfile: ./Dockerfile
