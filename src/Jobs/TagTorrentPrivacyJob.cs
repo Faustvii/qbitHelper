@@ -32,7 +32,7 @@ public class TagTorrentPrivacyJob(
         var torrentsToTag = torrents
             .Where(x =>
                 !x.Tags.Contains(tagTorrentSettings.PublicTag, StringComparer.OrdinalIgnoreCase)
-                || !x.Tags.Contains(tagTorrentSettings.PrivateTag, StringComparer.OrdinalIgnoreCase)
+                && !x.Tags.Contains(tagTorrentSettings.PrivateTag, StringComparer.OrdinalIgnoreCase)
             )
             .ToList();
 
