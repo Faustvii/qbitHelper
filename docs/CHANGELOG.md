@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/Faustvii/qbitHelper/compare/v1.1.0...v1.1.1) (2024-04-13)
+
+
+### Bug Fixes
+
+* fixed torrent privacy tag job doing the same work over and over ([f59b8f1](https://github.com/Faustvii/qbitHelper/commit/f59b8f1673bd7e6b4a1ddd8fab7a4979b13de4d9))
+
 # [1.1.0](https://github.com/Faustvii/qbitHelper/compare/v1.0.0...v1.1.0) (2024-04-13)
 
 
