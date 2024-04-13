@@ -87,9 +87,9 @@ jobs:
                   file: ./Dockerfile
                   push: true
                   tags: |
-                      ghcr.io/faustvii/qbitHelper:latest
-                      ghcr.io/faustvii/qbitHelper:${{ github.sha }}
-                      ghcr.io/faustvii/qbitHelper:${{ needs.get_next_version.outputs.new_version }}
+                      ghcr.io/faustvii/qbithelper:latest
+                      ghcr.io/faustvii/qbithelper:${{ github.sha }}
+                      ghcr.io/faustvii/qbithelper:${{ needs.get_next_version.outputs.new_version }}
 
             - name: Semantic Release
               uses: cycjimmy/semantic-release-action@v3
