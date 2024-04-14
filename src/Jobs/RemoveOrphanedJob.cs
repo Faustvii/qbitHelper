@@ -53,9 +53,13 @@ public class RemoveOrphanedJob(
                 File.Delete(file);
         }
 
-        //delete empty directories
-        foreach (var directory in Directory.GetDirectories(orphanPathed, "*", SearchOption.AllDirectories))
+        var directories = Directory.GetDirectories(orphanPathed, "*", SearchOption.AllDirectories);
+        // sort the directories so we delete subfolders first
+        Array.Sort(directories, (a, b) => b.Length.CompareTo(a.Length));
+        foreach (var directory in directories)
         {
+            if(!Directory.Exists(directory))
+                continue;
             if (Directory.GetFiles(directory).Length == 0)
             {
                 if (_optionsAccessor.CurrentValue.DryRun)
