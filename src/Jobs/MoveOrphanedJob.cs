@@ -106,7 +106,7 @@ public partial class MoveOrphanedJob(
             {
                 allFilePaths.Add(
                     GetFilePathForSingleFileTorrent(
-                        clientSettings.AppendExtensionToIncompleteFiles ?? false,
+                        clientSettings,
                         torrent
                     )
                 );
@@ -129,7 +129,7 @@ public partial class MoveOrphanedJob(
 
         var filePaths = new List<string>();
         var torrentSavePath = torrent.SavePath;
-        if (clientSettings.TempPathEnabled == true)
+        if (clientSettings.TempPathEnabled == true && torrent.Progress < 1)
             torrentSavePath = clientSettings.TempPath;
 
         foreach (var file in content)
@@ -150,16 +150,22 @@ public partial class MoveOrphanedJob(
     }
 
     private static string GetFilePathForSingleFileTorrent(
-        bool appendExtensionToIncompleteFiles,
+        Preferences clientSettings,
         TorrentInfo torrent
     )
     {
-        var path = torrent.ContentPath;
-        if (torrent.Progress < 1 && appendExtensionToIncompleteFiles)
+        var torrentSavePath = torrent.SavePath;
+        if (clientSettings.TempPathEnabled == true && torrent.Progress < 1)
+            torrentSavePath = clientSettings.TempPath;
+
+        if (
+            torrent.Progress < 1
+            && clientSettings.AppendExtensionToIncompleteFiles.GetValueOrDefault()
+        )
         {
-            return $"{torrent.ContentPath}.!qB";
+            return $"{torrentSavePath}.!qB";
         }
-        return path;
+        return torrentSavePath;
     }
 
     [GeneratedRegex(@"\.\w{1,5}$", RegexOptions.Compiled, matchTimeoutMilliseconds: 100)]
