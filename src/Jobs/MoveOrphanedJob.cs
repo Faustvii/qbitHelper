@@ -51,7 +51,7 @@ public partial class MoveOrphanedJob(
             localOrphanedFiles.Count(),
             allFiles.Length
         );
-        
+
         if (!localOrphanedFiles.Any())
             return;
 
@@ -99,7 +99,7 @@ public partial class MoveOrphanedJob(
     {
         var allFilePaths = new List<string>();
 
-        foreach (var torrent in torrents)
+        foreach (var torrent in torrents.Where(x => x is not null))
         {
             var singleFileTorrent = _extensionRegex.IsMatch(torrent.ContentPath);
             if (singleFileTorrent)
@@ -123,8 +123,11 @@ public partial class MoveOrphanedJob(
         TorrentInfo torrent
     )
     {
-        var filePaths = new List<string>();
         var content = await client.GetTorrentContentsAsync(torrent.Hash);
+        if (content is null)
+            return [];
+
+        var filePaths = new List<string>();
         foreach (var file in content)
         {
             if (
