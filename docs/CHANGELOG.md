@@ -1,3 +1,10 @@
+## [1.1.5](https://github.com/Faustvii/qbitHelper/compare/v1.1.4...v1.1.5) (2024-04-14)
+
+
+### Bug Fixes
+
+* when torrents are stuck in metadata they won't pass the stall check ([51466aa](https://github.com/Faustvii/qbitHelper/commit/51466aa6a2519ef90e034ec18d4fd6272037ab02))
+
 ## [1.1.4](https://github.com/Faustvii/qbitHelper/compare/v1.1.3...v1.1.4) (2024-04-13)
 
 
