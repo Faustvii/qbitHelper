@@ -5,10 +5,10 @@ namespace QBitHelper.Services;
 
 public class QBittorentClientAccessor
 {
-    private readonly IOptionsMonitor<SettingsOptions> _optionsAccessor;
+    private readonly IOptionsMonitor<AppConfig> _optionsAccessor;
     private QBittorrentClient _client;
 
-    public QBittorentClientAccessor(IOptionsMonitor<SettingsOptions> optionsAccessor)
+    public QBittorentClientAccessor(IOptionsMonitor<AppConfig> optionsAccessor)
     {
         _optionsAccessor = optionsAccessor;
         _client = new QBittorrentClient(

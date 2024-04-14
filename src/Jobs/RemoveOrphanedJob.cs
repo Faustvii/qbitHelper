@@ -6,13 +6,13 @@ using Quartz;
 namespace QBitHelper.Jobs;
 
 public class RemoveOrphanedJob(
-    IOptionsMonitor<SettingsOptions> optionsAccessor,
+    IOptionsMonitor<AppConfig> optionsAccessor,
     ILogger<RemoveOrphanedJob> logger,
     PathMappingService pathMappingService
 ) : IJob
 {
     public readonly static JobKey JobKey = new("RemoveOrphanedJob");
-    private readonly IOptionsMonitor<SettingsOptions> _optionsAccessor = optionsAccessor;
+    private readonly IOptionsMonitor<AppConfig> _optionsAccessor = optionsAccessor;
     private readonly ILogger<RemoveOrphanedJob> _logger = logger;
     private readonly PathMappingService _pathMappingService = pathMappingService;
 

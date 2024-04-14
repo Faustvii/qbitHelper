@@ -10,13 +10,13 @@ namespace QBitHelper.Services
 {
     public class JobFactoryService : BackgroundService
     {
-        private readonly IOptionsMonitor<SettingsOptions> _optionsAccessor;
+        private readonly IOptionsMonitor<AppConfig> _optionsAccessor;
         private readonly ISchedulerFactory _schedulerFactory;
         private readonly ILogger<JobFactoryService> _logger;
         private readonly JobChainingJobListener _jobChainingJobListener = new("ChainListener");
 
         public JobFactoryService(
-            IOptionsMonitor<SettingsOptions> optionsAccessor,
+            IOptionsMonitor<AppConfig> optionsAccessor,
             ISchedulerFactory schedulerFactory,
             ILogger<JobFactoryService> logger
         )
@@ -34,7 +34,7 @@ namespace QBitHelper.Services
             );
         }
 
-        public async Task RegisterJobs(SettingsOptions settings)
+        public async Task RegisterJobs(AppConfig settings)
         {
             var scheduler = await _schedulerFactory.GetScheduler();
             var jobConfig = settings.JobConfig;

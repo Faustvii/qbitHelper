@@ -1,6 +1,6 @@
 namespace QBitHelper;
 
-public class SettingsOptions
+public class AppConfig
 {
     public const string ConfigurationSectionName = "Settings";
 
@@ -40,6 +40,7 @@ public class StalledArrJobConfig
     public required bool Enabled { get; set; }
     public required int IntervalMinutes { get; set; }
     public required int MinimumTorrentAgeMinutes { get; set; }
+    public required int MinimumTorrentAgeMetadataMinutes { get; set; }
 }
 
 public class TagTorrentPrivacyConfig

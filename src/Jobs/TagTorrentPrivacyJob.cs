@@ -7,7 +7,7 @@ using Quartz;
 namespace QBitHelper.Jobs;
 
 public class TagTorrentPrivacyJob(
-    IOptionsMonitor<SettingsOptions> optionsAccessor,
+    IOptionsMonitor<AppConfig> optionsAccessor,
     ILogger<TagTorrentPrivacyJob> logger,
     QBittorentClientAccessor qBittorentClientAccessor
 ) : IJob

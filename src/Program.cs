@@ -17,8 +17,8 @@ var builder = Host.CreateDefaultBuilder()
         {
             services.AddSingleton<QBittorentClientAccessor>();
             services.AddSingleton<PathMappingService>();
-            services.Configure<SettingsOptions>(
-                hostContext.Configuration.GetSection(SettingsOptions.ConfigurationSectionName)
+            services.Configure<AppConfig>(
+                hostContext.Configuration.GetSection(AppConfig.ConfigurationSectionName)
             );
             services.AddLogging(loggingBuilder =>
             {

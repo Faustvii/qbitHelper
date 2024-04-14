@@ -11,14 +11,14 @@ namespace QBitHelper.Jobs;
 public partial class MoveOrphanedJob(
     QBittorentClientAccessor qBittorentClientAccessor,
     PathMappingService pathMappingService,
-    IOptionsMonitor<SettingsOptions> optionsAccessor,
+    IOptionsMonitor<AppConfig> optionsAccessor,
     ILogger<MoveOrphanedJob> logger
 ) : IJob
 {
     public static readonly JobKey JobKey = new("MoveOrphanedJob");
     private readonly QBittorentClientAccessor _qBittorentClientAccessor = qBittorentClientAccessor;
     private readonly PathMappingService _pathMappingService = pathMappingService;
-    private readonly IOptionsMonitor<SettingsOptions> _optionsAccessor = optionsAccessor;
+    private readonly IOptionsMonitor<AppConfig> _optionsAccessor = optionsAccessor;
     private readonly ILogger<MoveOrphanedJob> _logger = logger;
     private static readonly Regex _extensionRegex = FileExtensionRegex();
 

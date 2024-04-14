@@ -5,12 +5,12 @@ namespace QBitHelper.Services;
 
 public class PathMappingService
 {
-    private IOptionsMonitor<SettingsOptions> _optionsAccessor;
+    private IOptionsMonitor<AppConfig> _optionsAccessor;
     private readonly ILogger<PathMappingService> _logger;
     private Dictionary<string, string> _localPathMappings;
     private Dictionary<string, string> _remotePathMappings;
 
-    public PathMappingService(IOptionsMonitor<SettingsOptions> optionsAccessor, ILogger<PathMappingService> logger)
+    public PathMappingService(IOptionsMonitor<AppConfig> optionsAccessor, ILogger<PathMappingService> logger)
     {
         _optionsAccessor = optionsAccessor;
         _logger = logger;

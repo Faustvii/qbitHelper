@@ -7,7 +7,7 @@ namespace QBitHelper.Services;
 
 public sealed class ArrClient(
     IHttpClientFactory httpClientFactory,
-    IOptionsMonitor<SettingsOptions> optionsAccessor,
+    IOptionsMonitor<AppConfig> optionsAccessor,
     ILogger<ArrClient> logger
 )
 {
