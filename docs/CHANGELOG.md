@@ -1,3 +1,10 @@
+## [1.2.4](https://github.com/Faustvii/qbitHelper/compare/v1.2.3...v1.2.4) (2024-04-14)
+
+
+### Bug Fixes
+
+* only delete folder if it has no files in it's subfolders ([77d585e](https://github.com/Faustvii/qbitHelper/commit/77d585e73e95da7e360cacafc1466186b628ef11))
+
 ## [1.2.3](https://github.com/Faustvii/qbitHelper/compare/v1.2.2...v1.2.3) (2024-04-14)
 
 
