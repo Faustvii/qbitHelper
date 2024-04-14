@@ -1,3 +1,10 @@
+## [1.2.3](https://github.com/Faustvii/qbitHelper/compare/v1.2.2...v1.2.3) (2024-04-14)
+
+
+### Bug Fixes
+
+* delete sub directories before parent directories ([560db5a](https://github.com/Faustvii/qbitHelper/commit/560db5a3d5b0442aa2c446d450b92e850b541894))
+
 ## [1.2.2](https://github.com/Faustvii/qbitHelper/compare/v1.2.1...v1.2.2) (2024-04-14)
 
 
