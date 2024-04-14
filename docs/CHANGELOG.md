@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/Faustvii/qbitHelper/compare/v1.2.0...v1.2.1) (2024-04-14)
+
+
+### Bug Fixes
+
+* obviously we should only use the temp path for in progress torrents ([9d7e657](https://github.com/Faustvii/qbitHelper/commit/9d7e6571f265f05a5846f5c3b249da8faf2f6074))
+
 # [1.2.0](https://github.com/Faustvii/qbitHelper/compare/v1.1.6...v1.2.0) (2024-04-14)
 
 
