@@ -1,3 +1,15 @@
+# [1.2.0](https://github.com/Faustvii/qbitHelper/compare/v1.1.6...v1.2.0) (2024-04-14)
+
+
+### Bug Fixes
+
+* when a torrent was not completely done, but some files where they would get wrongly orphaned ([0f59eb2](https://github.com/Faustvii/qbitHelper/commit/0f59eb294c158834804964ec2f94062c099a6208))
+
+
+### Features
+
+* added job to limit public torrent speeds ([0bfb034](https://github.com/Faustvii/qbitHelper/commit/0bfb0347e6754470b9a49790c5948b28e08a24e0))
+
 ## [1.1.6](https://github.com/Faustvii/qbitHelper/compare/v1.1.5...v1.1.6) (2024-04-14)
 
 
