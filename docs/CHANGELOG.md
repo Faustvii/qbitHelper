@@ -1,3 +1,10 @@
+## [1.1.6](https://github.com/Faustvii/qbitHelper/compare/v1.1.5...v1.1.6) (2024-04-14)
+
+
+### Bug Fixes
+
+* orphan job can sometimes fail with a nullpointer ([095f9cf](https://github.com/Faustvii/qbitHelper/commit/095f9cfab4e1c69869cfeed69ded5184a8d0cbc4))
+
 ## [1.1.5](https://github.com/Faustvii/qbitHelper/compare/v1.1.4...v1.1.5) (2024-04-14)
 
 
