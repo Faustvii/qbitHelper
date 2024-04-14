@@ -11,7 +11,7 @@ public class RemoveOrphanedJob(
     PathMappingService pathMappingService
 ) : IJob
 {
-    public readonly static JobKey JobKey = new("RemoveOrphanedJob");
+    public static readonly JobKey JobKey = new("RemoveOrphanedJob");
     private readonly IOptionsMonitor<AppConfig> _optionsAccessor = optionsAccessor;
     private readonly ILogger<RemoveOrphanedJob> _logger = logger;
     private readonly PathMappingService _pathMappingService = pathMappingService;

@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using QBitHelper;
+using QBitHelper.Extensions;
 using QBitHelper.Jobs;
 using QBitHelper.Services;
 using Quartz;
@@ -39,26 +40,11 @@ var builder = Host.CreateDefaultBuilder()
                 options.Scheduling.IgnoreDuplicates = true;
             });
             services.AddQuartz(q =>
-                q.AddJob<MoveOrphanedJob>(j =>
-                        j.WithIdentity(MoveOrphanedJob.JobKey)
-                            .StoreDurably()
-                            .DisallowConcurrentExecution()
-                    )
-                    .AddJob<RemoveOrphanedJob>(j =>
-                        j.WithIdentity(RemoveOrphanedJob.JobKey)
-                            .StoreDurably()
-                            .DisallowConcurrentExecution()
-                    )
-                    .AddJob<InformArrAboutStalledJob>(j =>
-                        j.WithIdentity(InformArrAboutStalledJob.JobKey)
-                            .StoreDurably()
-                            .DisallowConcurrentExecution()
-                    )
-                    .AddJob<TagTorrentPrivacyJob>(j =>
-                        j.WithIdentity(TagTorrentPrivacyJob.JobKey)
-                            .StoreDurably()
-                            .DisallowConcurrentExecution()
-                    )
+                q.AddDefaultJob<MoveOrphanedJob>(MoveOrphanedJob.JobKey)
+                    .AddDefaultJob<RemoveOrphanedJob>(RemoveOrphanedJob.JobKey)
+                    .AddDefaultJob<InformArrAboutStalledJob>(InformArrAboutStalledJob.JobKey)
+                    .AddDefaultJob<TagTorrentPrivacyJob>(TagTorrentPrivacyJob.JobKey)
+                    .AddDefaultJob<LimitPublicTorrentSpeedJob>(LimitPublicTorrentSpeedJob.JobKey)
             );
             services.AddQuartzHostedService(x =>
             {

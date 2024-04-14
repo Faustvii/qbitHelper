@@ -101,7 +101,7 @@ public class InformArrAboutStalledJob(
         if (
             torrentQueue is null
             || !torrentQueue.Status.Equals("Warning", StringComparison.OrdinalIgnoreCase)
-            && !torrentQueue.Status.Equals("Queued", StringComparison.OrdinalIgnoreCase)
+                && !torrentQueue.Status.Equals("Queued", StringComparison.OrdinalIgnoreCase)
         )
             return;
 

@@ -34,97 +34,89 @@ namespace QBitHelper.Services
             );
         }
 
-        public async Task RegisterJobs(AppConfig settings)
-        {
-            var scheduler = await _schedulerFactory.GetScheduler();
-            var jobConfig = settings.JobConfig;
-            if (jobConfig.Orphan.Enabled)
-            {
-                _logger.LogInformation("Enabling orphaned job");
-                var moveTrigger = CreateTrigger(
-                    MoveOrphanedJob.JobKey,
-                    jobConfig.Orphan.IntervalMinutes
-                );
-                scheduler.ListenerManager.AddJobListener(
-                    _jobChainingJobListener,
-                    KeyMatcher<JobKey>.KeyEquals(MoveOrphanedJob.JobKey)
-                );
-                var jobDetail =
-                    await scheduler.GetJobDetail(MoveOrphanedJob.JobKey)
-                    ?? JobBuilder
-                        .Create<MoveOrphanedJob>()
-                        .WithIdentity(MoveOrphanedJob.JobKey)
-                        .StoreDurably()
-                        .Build();
-                await scheduler.ScheduleJob(jobDetail, [moveTrigger], replace: true);
-            }
-            else
-            {
-                _logger.LogInformation("Disabling orphaned job");
-                var trigger = CreateTrigger(MoveOrphanedJob.JobKey, 0);
-                await scheduler.PauseTrigger(trigger.Key);
-            }
-
-            if (jobConfig.StalledArr.Enabled)
-            {
-                _logger.LogInformation("Enabling stalled arr job");
-                var stalledArrTrigger = CreateTrigger(
-                    InformArrAboutStalledJob.JobKey,
-                    jobConfig.StalledArr.IntervalMinutes
-                );
-                var jobDetail =
-                    await scheduler.GetJobDetail(InformArrAboutStalledJob.JobKey)
-                    ?? JobBuilder
-                        .Create<InformArrAboutStalledJob>()
-                        .WithIdentity(InformArrAboutStalledJob.JobKey)
-                        .StoreDurably()
-                        .Build();
-                await scheduler.ScheduleJob(jobDetail, [stalledArrTrigger], replace: true);
-            }
-            else
-            {
-                _logger.LogInformation("Disabling stalled arr job");
-                var trigger = CreateTrigger(InformArrAboutStalledJob.JobKey, 0);
-                await scheduler.PauseTrigger(trigger.Key);
-            }
-
-            if (jobConfig.TagTorrentPrivacy.Enabled)
-            {
-                _logger.LogInformation("Enabling tag torrent privacy job");
-                var tagTrigger = CreateTrigger(
-                    TagTorrentPrivacyJob.JobKey,
-                    jobConfig.TagTorrentPrivacy.IntervalMinutes
-                );
-                var jobDetail =
-                    await scheduler.GetJobDetail(TagTorrentPrivacyJob.JobKey)
-                    ?? JobBuilder
-                        .Create<TagTorrentPrivacyJob>()
-                        .WithIdentity(TagTorrentPrivacyJob.JobKey)
-                        .StoreDurably()
-                        .Build();
-                await scheduler.ScheduleJob(jobDetail, [tagTrigger], replace: true);
-            }
-            else
-            {
-                _logger.LogInformation("Disabling tag torrent privacy job");
-                var trigger = CreateTrigger(TagTorrentPrivacyJob.JobKey, 0);
-                await scheduler.PauseTrigger(trigger.Key);
-            }
-        }
-
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             await RegisterJobs(_optionsAccessor.CurrentValue);
         }
 
-        private static ITrigger CreateTrigger(JobKey jobKey, int intervalMinutes)
+        private async Task RegisterJobs(AppConfig settings)
+        {
+            var scheduler = await _schedulerFactory.GetScheduler();
+            var jobConfig = settings.JobConfig;
+            if (jobConfig.Orphan.Enabled)
+            {
+                // Add chained job RemoveOrphanedJob to MoveOrphanedJob
+                scheduler.ListenerManager.AddJobListener(
+                    _jobChainingJobListener,
+                    KeyMatcher<JobKey>.KeyEquals(MoveOrphanedJob.JobKey)
+                );
+            }
+            await ManageJob<MoveOrphanedJob>(
+                MoveOrphanedJob.JobKey,
+                jobConfig.Orphan.Enabled,
+                TimeSpan.FromMinutes(jobConfig.Orphan.IntervalMinutes),
+                _logger,
+                scheduler
+            );
+            await ManageJob<InformArrAboutStalledJob>(
+                InformArrAboutStalledJob.JobKey,
+                jobConfig.StalledArr.Enabled,
+                TimeSpan.FromMinutes(jobConfig.StalledArr.IntervalMinutes),
+                _logger,
+                scheduler
+            );
+
+            await ManageJob<TagTorrentPrivacyJob>(
+                TagTorrentPrivacyJob.JobKey,
+                jobConfig.TagTorrentPrivacy.Enabled,
+                TimeSpan.FromMinutes(jobConfig.TagTorrentPrivacy.IntervalMinutes),
+                _logger,
+                scheduler
+            );
+
+            await ManageJob<LimitPublicTorrentSpeedJob>(
+                LimitPublicTorrentSpeedJob.JobKey,
+                jobConfig.LimitPublicTorrentSpeed.Enabled,
+                TimeSpan.FromSeconds(jobConfig.LimitPublicTorrentSpeed.IntervalSeconds),
+                _logger,
+                scheduler
+            );
+        }
+
+        public static async Task ManageJob<T>(
+            JobKey jobKey,
+            bool enabled,
+            TimeSpan interval,
+            ILogger logger,
+            IScheduler scheduler
+        )
+            where T : IJob
+        {
+            if (enabled)
+            {
+                logger.LogInformation("Enabling {jobKey} job", jobKey.Name);
+                var trigger = CreateTrigger(jobKey, interval);
+                var jobDetail =
+                    await scheduler.GetJobDetail(jobKey)
+                    ?? JobBuilder.Create<T>().WithIdentity(jobKey).StoreDurably().Build();
+                await scheduler.ScheduleJob(jobDetail, [trigger], replace: true);
+            }
+            else
+            {
+                logger.LogInformation("Disabling {jobKey} job", jobKey.Name);
+                var trigger = CreateTrigger(jobKey, TimeSpan.MaxValue);
+                await scheduler.PauseTrigger(trigger.Key);
+            }
+        }
+
+        private static ITrigger CreateTrigger(JobKey jobKey, TimeSpan interval)
         {
             return TriggerBuilder
                 .Create()
                 .ForJob(jobKey)
                 .WithIdentity($"{jobKey.Name}Trigger")
                 .StartNow()
-                .WithSimpleSchedule(x => x.WithIntervalInMinutes(intervalMinutes).RepeatForever())
+                .WithSimpleSchedule(x => x.WithInterval(interval).RepeatForever())
                 .Build();
         }
     }
