@@ -53,6 +53,24 @@ public class RemoveOrphanedJob(
                 File.Delete(file);
         }
 
+        //delete empty directories
+        foreach (var directory in Directory.GetDirectories(orphanPathed, "*", SearchOption.AllDirectories))
+        {
+            if (Directory.GetFiles(directory).Length == 0)
+            {
+                if (_optionsAccessor.CurrentValue.DryRun)
+                {
+                    _logger.LogInformation(
+                        "Would delete {directory}",
+                        _pathMappingService.MapToRemotePath(directory)
+                    );
+                    continue;
+                }
+                _logger.LogInformation("Deleting {directory}", _pathMappingService.MapToRemotePath(directory));
+                Directory.Delete(directory);
+            }
+        }
+
         return Task.CompletedTask;
     }
 }

@@ -80,12 +80,14 @@ public partial class MoveOrphanedJob(
                     Directory.CreateDirectory(destinationDirectory);
 
                 File.Move(filePath, destinationPath);
+                File.SetLastWriteTimeUtc(destinationPath, DateTime.UtcNow);
             }
             else if (Directory.Exists(filePath))
             {
                 if (!Directory.Exists(destinationPath))
                     Directory.CreateDirectory(destinationPath);
                 Directory.Move(filePath, destinationPath);
+                Directory.SetLastWriteTimeUtc(destinationPath, DateTime.UtcNow);
             }
         }
         _logger.LogInformation("Moved orphaned {count} files", localOrphanedFiles.Count());
@@ -104,12 +106,7 @@ public partial class MoveOrphanedJob(
             var singleFileTorrent = _extensionRegex.IsMatch(torrent.ContentPath);
             if (singleFileTorrent)
             {
-                allFilePaths.Add(
-                    GetFilePathForSingleFileTorrent(
-                        clientSettings,
-                        torrent
-                    )
-                );
+                allFilePaths.Add(GetFilePathForSingleFileTorrent(clientSettings, torrent));
                 continue;
             }
             allFilePaths.AddRange(await GetFilePathsForTorrent(client, clientSettings, torrent));
@@ -154,9 +151,7 @@ public partial class MoveOrphanedJob(
         TorrentInfo torrent
     )
     {
-        var torrentSavePath = torrent.SavePath;
-        if (clientSettings.TempPathEnabled == true && torrent.Progress < 1)
-            torrentSavePath = clientSettings.TempPath;
+        var torrentSavePath = torrent.ContentPath;
 
         if (
             torrent.Progress < 1
