@@ -128,6 +128,10 @@ public partial class MoveOrphanedJob(
             return [];
 
         var filePaths = new List<string>();
+        var torrentSavePath = torrent.SavePath;
+        if (clientSettings.TempPathEnabled == true)
+            torrentSavePath = clientSettings.TempPath;
+
         foreach (var file in content)
         {
             if (
@@ -135,15 +139,11 @@ public partial class MoveOrphanedJob(
                 && clientSettings.AppendExtensionToIncompleteFiles.GetValueOrDefault()
             )
             {
-                var torrentSavePath = torrent.SavePath;
-                if (clientSettings.TempPathEnabled == true)
-                    torrentSavePath = clientSettings.TempPath;
-
                 filePaths.Add(Path.Combine(torrentSavePath, $"{file.Name}.!qB"));
             }
             else
             {
-                filePaths.Add(Path.Combine(torrent.SavePath, file.Name));
+                filePaths.Add(Path.Combine(torrentSavePath, file.Name));
             }
         }
         return [.. filePaths];
