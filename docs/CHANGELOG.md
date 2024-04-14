@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/Faustvii/qbitHelper/compare/v1.2.1...v1.2.2) (2024-04-14)
+
+
+### Bug Fixes
+
+* single file torrents orphan were handled incorrectly ([5e0f1ac](https://github.com/Faustvii/qbitHelper/commit/5e0f1ac74290a6086e64a86232f16b382d6e63e5))
+
 ## [1.2.1](https://github.com/Faustvii/qbitHelper/compare/v1.2.0...v1.2.1) (2024-04-14)
 
 
