@@ -60,7 +60,7 @@ public class RemoveOrphanedJob(
         {
             if(!Directory.Exists(directory))
                 continue;
-            if (Directory.GetFiles(directory).Length == 0)
+            if (Directory.GetFiles(directory, "*", SearchOption.AllDirectories).Length == 0)
             {
                 if (_optionsAccessor.CurrentValue.DryRun)
                 {
