@@ -1,3 +1,10 @@
+## [1.2.5](https://github.com/Faustvii/qbitHelper/compare/v1.2.4...v1.2.5) (2024-04-15)
+
+
+### Bug Fixes
+
+* changed tag torrent job to be able to run on a shorter interval ([a64ecd2](https://github.com/Faustvii/qbitHelper/commit/a64ecd28c4ce2247683f6cf1de2f147f2d48b4cd))
+
 ## [1.2.4](https://github.com/Faustvii/qbitHelper/compare/v1.2.3...v1.2.4) (2024-04-14)
 
 
