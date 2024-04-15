@@ -93,7 +93,7 @@ public class TagTorrentPrivacyConfig
     public required bool Enabled { get; set; }
     public required string PrivateTag { get; set; }
     public required string PublicTag { get; set; }
-    public required int IntervalMinutes { get; set; }
+    public required int IntervalSeconds { get; set; }
 
     public static TagTorrentPrivacyConfig Default()
     {
@@ -102,7 +102,7 @@ public class TagTorrentPrivacyConfig
             Enabled = false,
             PrivateTag = "private",
             PublicTag = "public",
-            IntervalMinutes = 60
+            IntervalSeconds = 60
         };
     }
 }

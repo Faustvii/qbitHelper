@@ -69,7 +69,7 @@ namespace QBitHelper.Services
             await ManageJob<TagTorrentPrivacyJob>(
                 TagTorrentPrivacyJob.JobKey,
                 jobConfig.TagTorrentPrivacy.Enabled,
-                TimeSpan.FromMinutes(jobConfig.TagTorrentPrivacy.IntervalMinutes),
+                TimeSpan.FromSeconds(jobConfig.TagTorrentPrivacy.IntervalSeconds),
                 _logger,
                 scheduler
             );
