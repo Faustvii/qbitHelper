@@ -46,6 +46,7 @@ var builder = Host.CreateDefaultBuilder()
                     .AddDefaultJob<TagTorrentPrivacyJob>(TagTorrentPrivacyJob.JobKey)
                     .AddDefaultJob<LimitPublicTorrentSpeedJob>(LimitPublicTorrentSpeedJob.JobKey)
                     .AddDefaultJob<ReannounceRacingTorrentJob>(ReannounceRacingTorrentJob.JobKey)
+                    .AddDefaultJob<TagIssueTorrentsJob>(TagIssueTorrentsJob.JobKey)
             );
             services.AddQuartzHostedService(x =>
             {

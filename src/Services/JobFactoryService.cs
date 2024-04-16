@@ -89,6 +89,14 @@ namespace QBitHelper.Services
                 _logger,
                 scheduler
             );
+            
+            await ManageJob<TagIssueTorrentsJob>(
+                TagIssueTorrentsJob.JobKey,
+                jobConfig.TagIssueTorrent.Enabled,
+                TimeSpan.FromSeconds(jobConfig.TagIssueTorrent.IntervalSeconds),
+                _logger,
+                scheduler
+            );
         }
 
         public static async Task ManageJob<T>(
