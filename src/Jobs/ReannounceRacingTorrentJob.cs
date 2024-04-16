@@ -9,7 +9,7 @@ namespace QBitHelper.Jobs
     public class ReannounceRacingTorrentJob(
         QBittorentClientAccessor qBittorentClientAccessor,
         TimeProvider timeProvider,
-        OptionsMonitor<AppConfig> optionsAccessor,
+        IOptionsMonitor<AppConfig> optionsAccessor,
         ILogger<ReannounceRacingTorrentJob> logger
     ) : IJob
     {
