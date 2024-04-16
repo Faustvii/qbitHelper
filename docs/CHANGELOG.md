@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/Faustvii/qbitHelper/compare/v1.3.0...v1.3.1) (2024-04-16)
+
+
+### Bug Fixes
+
+* dependency injection error in reannounce job ([fb3d762](https://github.com/Faustvii/qbitHelper/commit/fb3d762800561b7832d5638cae035f15f0c1977c))
+
 # [1.3.0](https://github.com/Faustvii/qbitHelper/compare/v1.2.5...v1.3.0) (2024-04-16)
 
 
