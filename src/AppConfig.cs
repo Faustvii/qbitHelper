@@ -27,6 +27,8 @@ public class JobConfig
         TagTorrentPrivacyConfig.Default();
     public required LimitPublicTorrentSpeedJobConfig LimitPublicTorrentSpeed { get; set; } =
         LimitPublicTorrentSpeedJobConfig.Default();
+    public required ReannounceRacingTorrentConfig ReannounceRacingTorrent { get; set; } =
+        ReannounceRacingTorrentConfig.Default();
 }
 
 public class LimitPublicTorrentSpeedJobConfig
@@ -105,6 +107,23 @@ public class TagTorrentPrivacyConfig
             PrivateTag = "private",
             PublicTag = "public",
             IntervalSeconds = 60
+        };
+    }
+}
+
+public class ReannounceRacingTorrentConfig
+{
+    public required bool Enabled { get; set; }
+    public required int IntervalSeconds { get; set; }
+    public required int MaximumTorrentAgeSeconds { get; set; }
+
+    public static ReannounceRacingTorrentConfig Default()
+    {
+        return new ReannounceRacingTorrentConfig
+        {
+            Enabled = false,
+            IntervalSeconds = 5,
+            MaximumTorrentAgeSeconds = 300
         };
     }
 }
