@@ -1,3 +1,15 @@
+# [1.4.0](https://github.com/Faustvii/qbitHelper/compare/v1.3.1...v1.4.0) (2024-04-16)
+
+
+### Bug Fixes
+
+* dryrun wasn't being listened to in reannouce racing job ([6d3b30e](https://github.com/Faustvii/qbitHelper/commit/6d3b30e9a5cf8d5f422182ee5a51b91d0275220c))
+
+
+### Features
+
+* added tag issue torrent job ([5e5b9e9](https://github.com/Faustvii/qbitHelper/commit/5e5b9e934cc830191f5480720270d748a4857df8))
+
 ## [1.3.1](https://github.com/Faustvii/qbitHelper/compare/v1.3.0...v1.3.1) (2024-04-16)
 
 
