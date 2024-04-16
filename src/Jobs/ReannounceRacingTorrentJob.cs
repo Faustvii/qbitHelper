@@ -25,6 +25,7 @@ namespace QBitHelper.Jobs
         public async Task Execute(IJobExecutionContext context)
         {
             var jobConfig = optionsAccessor.CurrentValue.JobConfig.ReannounceRacingTorrent;
+            var dryRun = optionsAccessor.CurrentValue.DryRun;
             var client = await qBittorentClientAccessor.GetClient();
             var latestTorrents = await client.GetTorrentListAsync(
                 new TorrentListQuery
@@ -57,7 +58,9 @@ namespace QBitHelper.Jobs
                     torrent.Name,
                     torrent.Hash
                 );
-                await client.ReannounceAsync(torrent.Hash, context.CancellationToken);
+
+                if (!dryRun)
+                    await client.ReannounceAsync(torrent.Hash, context.CancellationToken);
             }
         }
 
