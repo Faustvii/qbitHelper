@@ -1,3 +1,11 @@
+# [1.3.0](https://github.com/Faustvii/qbitHelper/compare/v1.2.5...v1.3.0) (2024-04-16)
+
+
+### Features
+
+* added option to exclude root folder of active torrent ([c443f87](https://github.com/Faustvii/qbitHelper/commit/c443f87d020adf8227eba37905b01f8f3e822655))
+* added reannounce racing torrent job ([d79bcdf](https://github.com/Faustvii/qbitHelper/commit/d79bcdf25c3ce3c4d452ff095a660a5bdf4f5044))
+
 ## [1.2.5](https://github.com/Faustvii/qbitHelper/compare/v1.2.4...v1.2.5) (2024-04-15)
 
 
