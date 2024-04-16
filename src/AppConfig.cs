@@ -54,6 +54,7 @@ public class OrphanJobConfig
     public required string OrphanPath { get; set; }
     public required int EmptyOrphanedDirectoryAfterDays { get; set; }
     public required int IntervalMinutes { get; set; }
+    public required bool ExcludeActiveTorrentRootFolders { get; set; }
     public string[] ExcludePatterns { get; set; } = [];
 
     public static OrphanJobConfig Default()
@@ -61,6 +62,7 @@ public class OrphanJobConfig
         return new OrphanJobConfig
         {
             Enabled = false,
+            ExcludeActiveTorrentRootFolders = false,
             OrphanPath = "/path/to/orphaned/files",
             EmptyOrphanedDirectoryAfterDays = 30,
             IntervalMinutes = 60,

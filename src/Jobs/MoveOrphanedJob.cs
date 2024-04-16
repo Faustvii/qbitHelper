@@ -29,6 +29,12 @@ public partial class MoveOrphanedJob(
         var torrents = await client.GetTorrentListAsync();
         var allTorrentFiles = await GetTorrentFiles(torrents, client, clientSettings);
         var localPaths = allTorrentFiles.Select(_pathMappingService.MapToLocalPath).ToList();
+        var activeTorrentRootFolders = torrents
+            .Select(GetTorrentFolder)
+            .Distinct()
+            .Select(_pathMappingService.MapToLocalPath)
+            .ToList();
+
         var settings = _optionsAccessor.CurrentValue;
         var qbitSettings = settings.QbittorrentConfig;
         var localPath = _pathMappingService.MapToLocalPath(qbitSettings.DownloadPath);
@@ -44,6 +50,21 @@ public partial class MoveOrphanedJob(
             .Where(file => !file.Contains(localOrphanPath, StringComparison.Ordinal))
             .Where(file => !matcher.Match(file).HasMatches)
             .ToArray();
+
+        _logger.LogDebug("Found {count} files in {localPath}", allFiles.Length, localPath);
+
+        if (settings.JobConfig.Orphan.ExcludeActiveTorrentRootFolders)
+            allFiles = allFiles
+                .Where(file => !activeTorrentRootFolders.Any(file.StartsWith))
+                .ToArray();
+
+        _logger.LogDebug(
+            "Excluded active torrent root folders leftover {count} files",
+            allFiles.Length
+        );
+
+        if (allFiles.Length == 0)
+            return;
 
         var localOrphanedFiles = allFiles.Except(localPaths);
         _logger.LogInformation(
@@ -112,6 +133,19 @@ public partial class MoveOrphanedJob(
             allFilePaths.AddRange(await GetFilePathsForTorrent(client, clientSettings, torrent));
         }
         return [.. allFilePaths];
+    }
+
+    private static string GetTorrentFolder(TorrentInfo torrent)
+    {
+        var singleFileTorrent = _extensionRegex.IsMatch(torrent.ContentPath);
+        if (singleFileTorrent)
+        {
+            var dirName = Path.GetDirectoryName(torrent.ContentPath);
+            if (dirName is not null)
+                return dirName;
+        }
+
+        return torrent.ContentPath;
     }
 
     private static async Task<string[]> GetFilePathsForTorrent(
