@@ -13,6 +13,7 @@ namespace QBitHelper.Jobs
         TimeProvider timeProvider
     ) : IJob
     {
+        private const string IssueTag = "issue";
         public static readonly JobKey JobKey = new("TagIssueTorrentsJob");
         private static readonly HashSet<string> WordsArray =
         [
@@ -34,12 +35,12 @@ namespace QBitHelper.Jobs
             foreach (var torrent in torrents.Where(x => x.AddedOn < olderThan))
             {
                 var hasIssues = await HasIssues(client, torrent);
-                if (hasIssues)
+                if (hasIssues && !torrent.Tags.Contains(IssueTag, StringComparer.OrdinalIgnoreCase))
                 {
                     torrentHashesToTag.Add(torrent.Hash);
                     continue;
                 }
-                if (torrent.Tags.Contains("issue", StringComparer.OrdinalIgnoreCase))
+                if (torrent.Tags.Contains(IssueTag, StringComparer.OrdinalIgnoreCase))
                 {
                     torrentHashesToRemoveTagFrom.Add(torrent.Hash);
                 }
@@ -52,7 +53,7 @@ namespace QBitHelper.Jobs
                     torrentHashesToTag.Count
                 );
                 if (!dryRun)
-                    await client.AddTorrentTagAsync(torrentHashesToTag, "issue");
+                    await client.AddTorrentTagAsync(torrentHashesToTag, IssueTag);
             }
 
             if (torrentHashesToRemoveTagFrom.Count > 0)
@@ -62,7 +63,7 @@ namespace QBitHelper.Jobs
                     torrentHashesToRemoveTagFrom.Count
                 );
                 if (!dryRun)
-                    await client.DeleteTorrentTagAsync(torrentHashesToRemoveTagFrom, "issue");
+                    await client.DeleteTorrentTagAsync(torrentHashesToRemoveTagFrom, IssueTag);
             }
         }
 
