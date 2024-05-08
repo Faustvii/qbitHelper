@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/Faustvii/qbitHelper/compare/v1.4.0...v1.5.0) (2024-05-08)
+
+
+### Features
+
+* added job to ensure qbittorrent preferences stay in sync ([20d31a4](https://github.com/Faustvii/qbitHelper/commit/20d31a4e3765bf1854edcb992dae12697536b22c))
+
 # [1.4.0](https://github.com/Faustvii/qbitHelper/compare/v1.3.1...v1.4.0) (2024-04-16)
 
 
