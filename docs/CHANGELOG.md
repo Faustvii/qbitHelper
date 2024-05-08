@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/Faustvii/qbitHelper/compare/v1.5.0...v1.5.1) (2024-05-08)
+
+
+### Bug Fixes
+
+* fixed tag issue torrents tagging issue on torrents with the issue tag already ([8822873](https://github.com/Faustvii/qbitHelper/commit/882287314c83b434196bce6571dd4b807c4bc7e5))
+
 # [1.5.0](https://github.com/Faustvii/qbitHelper/compare/v1.4.0...v1.5.0) (2024-05-08)
 
 
