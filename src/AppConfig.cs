@@ -17,6 +17,12 @@ public class QbittorrentConfig
     public required string DownloadPath { get; set; }
     public string? Username { get; set; }
     public string? Password { get; set; }
+    public PreferenceConfig Preferences { get; set; } = new PreferenceConfig();
+
+    public record PreferenceConfig
+    {
+        public int ListenPort { get; set; } = 6881;
+    }
 }
 
 public class JobConfig
@@ -31,6 +37,9 @@ public class JobConfig
         ReannounceRacingTorrentConfig.Default();
     public required TagIssueTorrentConfig TagIssueTorrent { get; set; } =
         TagIssueTorrentConfig.Default();
+
+    public required EnsureQbitPreferencesJobConfig EnsureQbitPreferences { get; set; } =
+        EnsureQbitPreferencesJobConfig.Default();
 }
 
 public class LimitPublicTorrentSpeedJobConfig
@@ -49,6 +58,17 @@ public class LimitPublicTorrentSpeedJobConfig
             MaximumUploadSpeed = -1,
             MaximumDownloadSpeed = -1
         };
+    }
+}
+
+public class EnsureQbitPreferencesJobConfig
+{
+    public required bool Enabled { get; set; }
+    public required int IntervalSeconds { get; set; }
+
+    public static EnsureQbitPreferencesJobConfig Default()
+    {
+        return new EnsureQbitPreferencesJobConfig { Enabled = false, IntervalSeconds = 60 };
     }
 }
 
