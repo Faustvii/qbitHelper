@@ -40,7 +40,7 @@ namespace QBitHelper.Jobs
                     torrentHashesToTag.Add(torrent.Hash);
                     continue;
                 }
-                if (torrent.Tags.Contains(IssueTag, StringComparer.OrdinalIgnoreCase))
+                if (!hasIssues && torrent.Tags.Contains(IssueTag, StringComparer.OrdinalIgnoreCase))
                 {
                     torrentHashesToRemoveTagFrom.Add(torrent.Hash);
                 }
