@@ -1,3 +1,10 @@
+## [1.5.4](https://github.com/Faustvii/qbitHelper/compare/v1.5.3...v1.5.4) (2025-02-11)
+
+
+### Bug Fixes
+
+* only mark as issue when no valid trackers ([a815cfc](https://github.com/Faustvii/qbitHelper/commit/a815cfc56b267d13bef55fe8eef1b4db38e1dc00))
+
 ## [1.5.3](https://github.com/Faustvii/qbitHelper/compare/v1.5.2...v1.5.3) (2025-02-11)
 
 
