@@ -56,7 +56,7 @@ public class LimitPublicTorrentSpeedJobConfig
             Enabled = false,
             IntervalSeconds = 60,
             MaximumUploadSpeed = -1,
-            MaximumDownloadSpeed = -1
+            MaximumDownloadSpeed = -1,
         };
     }
 }
@@ -90,7 +90,7 @@ public class OrphanJobConfig
             OrphanPath = "/path/to/orphaned/files",
             EmptyOrphanedDirectoryAfterDays = 30,
             IntervalMinutes = 60,
-            ExcludePatterns = []
+            ExcludePatterns = [],
         };
     }
 }
@@ -109,7 +109,7 @@ public class StalledArrJobConfig
             Enabled = false,
             IntervalMinutes = 60,
             MinimumTorrentAgeMinutes = 60,
-            MinimumTorrentAgeMetadataMinutes = 60
+            MinimumTorrentAgeMetadataMinutes = 60,
         };
     }
 }
@@ -128,7 +128,7 @@ public class TagTorrentPrivacyConfig
             Enabled = false,
             PrivateTag = "private",
             PublicTag = "public",
-            IntervalSeconds = 60
+            IntervalSeconds = 60,
         };
     }
 }
@@ -145,7 +145,7 @@ public class ReannounceRacingTorrentConfig
         {
             Enabled = false,
             IntervalSeconds = 5,
-            MaximumTorrentAgeSeconds = 300
+            MaximumTorrentAgeSeconds = 300,
         };
     }
 }
@@ -162,7 +162,7 @@ public class TagIssueTorrentConfig
         {
             Enabled = false,
             IssueTag = "issue",
-            IntervalSeconds = 300
+            IntervalSeconds = 300,
         };
     }
 }
@@ -185,5 +185,5 @@ public enum ArrType
 {
     Radarr,
     Sonarr,
-    Readarr
+    Readarr,
 }

@@ -73,8 +73,9 @@ namespace QBitHelper.Jobs
             var activeTrackers = trackers.Where(x =>
                 x.TrackerStatus != TorrentTrackerStatus.Disabled
             );
-            var invalidTrackers = activeTrackers.Where(x => !IsTrackerStatusOk(x));
-            return invalidTrackers.Any();
+
+            var validTrackers = activeTrackers.Where(IsTrackerStatusOk);
+            return validTrackers.Any() is false;
         }
 
         private static bool IsTrackerStatusOk(TorrentTracker tracker)
