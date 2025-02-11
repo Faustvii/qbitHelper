@@ -1,3 +1,10 @@
+## [1.5.3](https://github.com/Faustvii/qbitHelper/compare/v1.5.2...v1.5.3) (2025-02-11)
+
+
+### Bug Fixes
+
+* support qbittorrent 5+ ([898463f](https://github.com/Faustvii/qbitHelper/commit/898463f2550d9955428a7a4ef478bef57bb3dcce))
+
 ## [1.5.2](https://github.com/Faustvii/qbitHelper/compare/v1.5.1...v1.5.2) (2024-05-21)
 
 
