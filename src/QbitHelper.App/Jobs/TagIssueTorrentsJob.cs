@@ -20,7 +20,7 @@ namespace QBitHelper.Jobs
             "unregistered",
             "not registered",
             "not found",
-            "not exist"
+            "not exist",
         ];
 
         public async Task Execute(IJobExecutionContext context)
