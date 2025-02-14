@@ -44,6 +44,7 @@ builder.Services.AddQuartz(q =>
         .AddDefaultJob<ReannounceRacingTorrentJob>(ReannounceRacingTorrentJob.JobKey)
         .AddDefaultJob<TagIssueTorrentsJob>(TagIssueTorrentsJob.JobKey)
         .AddDefaultJob<EnsureQbitPreferencesJob>(EnsureQbitPreferencesJob.JobKey)
+        .AddDefaultJob<EnsureQbitConnectableJob>(EnsureQbitConnectableJob.JobKey)
 );
 builder.Services.AddQuartzHostedService(x =>
 {

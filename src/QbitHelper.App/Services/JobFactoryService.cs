@@ -105,6 +105,14 @@ namespace QBitHelper.Services
                 _logger,
                 scheduler
             );
+
+            await ManageJob<EnsureQbitConnectableJob>(
+                EnsureQbitConnectableJob.JobKey,
+                jobConfig.EnsureQbitConnectable.Enabled,
+                TimeSpan.FromSeconds(jobConfig.EnsureQbitConnectable.IntervalSeconds),
+                _logger,
+                scheduler
+            );
         }
 
         public static async Task ManageJob<T>(

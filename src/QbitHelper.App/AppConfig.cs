@@ -40,6 +40,9 @@ public class JobConfig
 
     public required EnsureQbitPreferencesJobConfig EnsureQbitPreferences { get; set; } =
         EnsureQbitPreferencesJobConfig.Default();
+
+    public required EnsureQbitConnectableJobConfig EnsureQbitConnectable { get; set; } =
+        EnsureQbitConnectableJobConfig.Default();
 }
 
 public class LimitPublicTorrentSpeedJobConfig
@@ -69,6 +72,17 @@ public class EnsureQbitPreferencesJobConfig
     public static EnsureQbitPreferencesJobConfig Default()
     {
         return new EnsureQbitPreferencesJobConfig { Enabled = false, IntervalSeconds = 60 };
+    }
+}
+
+public class EnsureQbitConnectableJobConfig
+{
+    public required bool Enabled { get; set; }
+    public required int IntervalSeconds { get; set; }
+
+    public static EnsureQbitConnectableJobConfig Default()
+    {
+        return new EnsureQbitConnectableJobConfig { Enabled = false, IntervalSeconds = 60 };
     }
 }
 
