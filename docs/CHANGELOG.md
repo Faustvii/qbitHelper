@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/Faustvii/qbitHelper/compare/v1.5.4...v1.6.0) (2025-02-14)
+
+
+### Features
+
+* added new ensure qbittorrent connectable job ([0c3f9e5](https://github.com/Faustvii/qbitHelper/commit/0c3f9e50da3a16eb17b5c506cce7c0c4a018ab35))
+
 ## [1.5.4](https://github.com/Faustvii/qbitHelper/compare/v1.5.3...v1.5.4) (2025-02-11)
 
 
