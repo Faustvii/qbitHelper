@@ -58,7 +58,7 @@ public class RemoveOrphanedJob(
         Array.Sort(directories, (a, b) => b.Length.CompareTo(a.Length));
         foreach (var directory in directories)
         {
-            if(!Directory.Exists(directory))
+            if (!Directory.Exists(directory))
                 continue;
             if (Directory.GetFiles(directory, "*", SearchOption.AllDirectories).Length == 0)
             {
@@ -70,7 +70,10 @@ public class RemoveOrphanedJob(
                     );
                     continue;
                 }
-                _logger.LogInformation("Deleting {directory}", _pathMappingService.MapToRemotePath(directory));
+                _logger.LogInformation(
+                    "Deleting {directory}",
+                    _pathMappingService.MapToRemotePath(directory)
+                );
                 Directory.Delete(directory);
             }
         }

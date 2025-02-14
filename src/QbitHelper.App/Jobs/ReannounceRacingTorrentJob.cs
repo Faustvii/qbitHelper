@@ -19,7 +19,7 @@ namespace QBitHelper.Jobs
             "unregistered",
             "not registered",
             "not found",
-            "not exist"
+            "not exist",
         ];
 
         public async Task Execute(IJobExecutionContext context)
@@ -32,7 +32,7 @@ namespace QBitHelper.Jobs
                 {
                     SortBy = "added_on",
                     ReverseSort = true,
-                    Limit = 10
+                    Limit = 10,
                 }
             );
 
