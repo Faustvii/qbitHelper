@@ -1,3 +1,10 @@
+## [1.6.1](https://github.com/Faustvii/qbitHelper/compare/v1.6.0...v1.6.1) (2025-02-15)
+
+
+### Bug Fixes
+
+* changed connectable test to use external ip and not internal ([54327e5](https://github.com/Faustvii/qbitHelper/commit/54327e5fa013f297978536f57bb6cc96b621c291))
+
 # [1.6.0](https://github.com/Faustvii/qbitHelper/compare/v1.5.4...v1.6.0) (2025-02-14)
 
 
