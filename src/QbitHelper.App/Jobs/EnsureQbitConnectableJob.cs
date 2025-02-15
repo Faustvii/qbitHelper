@@ -26,7 +26,7 @@ namespace QBitHelper.Jobs
             if (externalIp is null)
                 return;
 
-            logger.LogInformation(
+            logger.LogDebug(
                 "Testing Qbittorrent connection on {ip}:{port}",
                 externalIp,
                 settings.ListenPort
@@ -38,7 +38,7 @@ namespace QBitHelper.Jobs
             );
             if (isConnectable)
             {
-                logger.LogInformation("Qbittorrent is connectable: {isConnectable}", isConnectable);
+                logger.LogDebug("Qbittorrent is connectable: {isConnectable}", isConnectable);
                 return;
             }
 
@@ -51,7 +51,7 @@ namespace QBitHelper.Jobs
                     preferences.CurrentInterfaceAddress == string.Empty ? "0.0.0.0" : string.Empty,
             };
 
-            logger.LogWarning(
+            logger.LogInformation(
                 "Qbittorrent is not connectable - updating network interface to {nic} with address {address}",
                 preferenceUpdate.CurrentNetworkInterface,
                 preferenceUpdate.CurrentInterfaceAddress
@@ -83,7 +83,7 @@ namespace QBitHelper.Jobs
                 return null;
             }
             var ip = ipLog.Message.Split("IP: ")[1].Split(" ")[0].Trim('"');
-            logger.LogInformation("Detected external IP: {ip}", ip);
+            logger.LogDebug("Detected external IP: {ip}", ip);
             JobStateStore.Set(LastExternalIPKey, ip);
             return ip;
         }
