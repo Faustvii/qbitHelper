@@ -1,3 +1,10 @@
+## [1.6.2](https://github.com/Faustvii/qbitHelper/compare/v1.6.1...v1.6.2) (2025-02-15)
+
+
+### Bug Fixes
+
+* changed log levels for new job ([4e1f49d](https://github.com/Faustvii/qbitHelper/commit/4e1f49da075dafd3fff093305345d8fd917c94fa))
+
 ## [1.6.1](https://github.com/Faustvii/qbitHelper/compare/v1.6.0...v1.6.1) (2025-02-15)
 
 
