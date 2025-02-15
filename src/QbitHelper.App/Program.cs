@@ -26,6 +26,8 @@ builder.Services.AddLogging(loggingBuilder =>
         );
 });
 
+builder.AddServiceDefaults();
+
 builder.Services.AddHttpClient();
 builder.Services.AddSingleton<ArrClient>();
 builder.Services.AddSingleton(TimeProvider.System);
@@ -54,7 +56,6 @@ builder.Services.AddQuartzHostedService(x =>
 builder.Services.AddHostedService<JobFactoryService>();
 
 builder.Services.AddSingleton<QBittorentClientAccessor>();
-builder.AddServiceDefaults();
 
 var host = builder.Build();
 await host.RunAsync();
